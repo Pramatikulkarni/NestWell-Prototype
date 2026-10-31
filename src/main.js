@@ -108,9 +108,12 @@ function moreSheet(st) {
     <div class="list">${navFor(st).more.map(([k, l, i]) => `<button class="item" data-act="go" data-to="/patient/${k}"><span class="ibox">${icon(i, 'sm')}</span><span class="grow t">${l}</span>${icon('chevR', 'sm')}</button>`).join('')}</div></div></div>`;
 }
 
+// Public link: the app fills the window and adapts to the device. The device switcher bar only shows with ?review or inside the review page.
+const REVIEW = /[?&]review\b/.test(location.search) || window.top !== window;
 function toolbar(st) {
+  if (!REVIEW) return '';
   return `<div class="proto-bar" role="region" aria-label="Prototype controls"><span class="brand">NestWell</span>
-    <span class="group"><span class="lbl" id="l-device">View</span><span class="seg" role="group" aria-labelledby="l-device">${[['phone', 'Phone'], ['desktop', 'Desktop']].map(([v, l]) => `<button data-act="proto" data-k="device" data-v="${v}" aria-pressed="${st.device === v}">${l}</button>`).join('')}</span></span>
+    <span class="group"><span class="lbl" id="l-device">View</span><span class="seg" role="group" aria-labelledby="l-device">${[['auto', 'Auto'], ['phone', 'Phone'], ['desktop', 'Desktop']].map(([v, l]) => `<button data-act="proto" data-k="device" data-v="${v}" aria-pressed="${st.device === v}">${l}</button>`).join('')}</span></span>
     <details class="demo"><summary>Demo</summary><div class="demo-pop">
       <label class="chk"><input type="checkbox" data-act="sim" data-k="offline" ${st.offline ? 'checked' : ''}> Offline</label>
       <label class="chk"><input type="checkbox" data-act="sim" data-k="result" ${st.sim.result === 'high' ? 'checked' : ''}> Reading above range</label>
@@ -154,7 +157,7 @@ function render() {
   const content = r.chrome ? shell(st, name, r, inner) : entry ? `<div class="main" id="scroller" style="flex:1;min-height:0">${inner}</div>${gateway.entryFooter(st)}` : `<div class="main" id="scroller" style="height:100%">${inner}</div>`;
   const entering = enterNext && !showSkeleton;
   const root = document.getElementById('root');
-  root.innerHTML = `${toolbar(st)}<div class="stage" data-device="${st.device}"><div class="app" data-chrome="${r.chrome ? 'on' : 'off'}" ${entering ? 'data-enter' : ''}>${content}${sheets}</div></div>`;
+  root.innerHTML = `${toolbar(st)}<div class="stage" data-device="${REVIEW ? (st.device === 'full' ? 'auto' : st.device) : 'auto'}"><div class="app" data-chrome="${r.chrome ? 'on' : 'off'}" ${entering ? 'data-enter' : ''}>${content}${sheets}</div></div>`;
   const sc = document.getElementById('scroller'); if (sc) sc.scrollTop = prevScroll;
   if (entering) { enterNext = false; (document.getElementById('page-title') || document.getElementById('main-content'))?.focus({ preventScroll: true }); countUp(); }
   else if (aid && !showSkeleton) { const e = document.getElementById(aid); if (e) { e.focus({ preventScroll: true }); if (sel != null && e.setSelectionRange) try { e.setSelectionRange(sel, sel); } catch { /* ignore */ } } }
