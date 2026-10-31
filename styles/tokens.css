@@ -1,0 +1,96 @@
+/* NestWell · Bioluminescent Glass tokens.
+   Light = frosted porcelain glass with a mint haze. Dark = deep teal with light that glows from inside.
+   Every text/background pairing below is AA or better; control boundaries are ≥ 3:1. */
+:root {
+  --font-head: "Manrope", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --r-card: 24px;
+  --r-ctrl: 16px;
+  --r-pill: 999px;
+  --gap: 16px;
+  --focus-w: 3px;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  color-scheme: light;
+}
+
+body[data-nw="light"], body:not([data-nw]) {
+  --bg: #f1f5f1;
+  --bg-glow-1: rgba(160, 226, 204, 0.70);   /* mint */
+  --bg-glow-2: rgba(252, 214, 206, 0.55);   /* blush */
+  --bg-glow-3: rgba(198, 226, 244, 0.65);   /* sky */
+  --surface: #ffffff;
+  --surface-2: #f5faf7;
+  --surface-3: #e8f1ec;
+  --glass: rgba(255, 255, 255, 0.50);
+  --glass-strong: rgba(255, 255, 255, 0.72);
+  --glass-solid: rgba(255, 255, 255, 0.96);
+  --orb-1: rgba(60, 200, 160, 0.46);
+  --orb-2: rgba(255, 165, 145, 0.40);
+  --orb-3: rgba(115, 180, 245, 0.42);
+  --glass-edge: rgba(255, 255, 255, 0.90);       /* bevel highlight */
+  --glass-line: rgba(36, 102, 90, 0.16);         /* decorative edge */
+  --text: #16312c;        /* 13:1 */
+  --text-2: #435a53;      /* 7.4:1 */
+  --text-3: #46605a;      /* 6.4:1 on the glass */
+  --brand: #1f6256;       /* 6.9:1 on white; white on brand 7.2:1 */
+  --on-brand: #ffffff;
+  --brand-soft: #d9f1e7;
+  --accent: #35cda9;      /* glow only, never text */
+  --border: rgba(36, 102, 90, 0.18);
+  --control: #5f7f72;     /* 4.0:1 control boundary */
+  --focus: #0f4f48;
+  --glow: 0 0 0 1px rgba(53, 205, 169, 0.35), 0 8px 26px -6px rgba(53, 205, 169, 0.40);
+  --shadow: 0 1px 0 var(--glass-edge) inset, 0 12px 32px -14px rgba(22, 49, 44, 0.22);
+  --shadow-pop: 0 1px 0 var(--glass-edge) inset, 0 22px 48px -16px rgba(22, 49, 44, 0.32);
+  --ok-fg: #1f6a47;   --ok-bg: #e4f4ea;
+  --warn-fg: #7f5208; --warn-bg: #fff2da;
+  --bad-fg: #a8202f;  --bad-bg: #ffe9e9;
+  --info-fg: #1f5a96; --info-bg: #e6f1fb;
+  --chart-1: #1f6256; --chart-2: #1f5a96; --chart-grid: rgba(36, 102, 90, 0.14);
+  --nav-active-bg: #d9f1e7;
+  --logo-stroke: #1f6256; --logo-dot: #16312c;
+  --splash: linear-gradient(165deg, #dff4ea 0%, #f1f5f1 52%, #fbe6e0 100%);
+  --page: #e4eae6;
+}
+
+body[data-nw="dark"] {
+  color-scheme: dark;
+  --bg: #062a2d;
+  --bg-glow-1: rgba(53, 205, 169, 0.20);
+  --bg-glow-2: rgba(120, 226, 214, 0.09);
+  --bg-glow-3: rgba(12, 96, 90, 0.55);
+  --surface: #0f4043;
+  --surface-2: #14494c;
+  --surface-3: #1a5659;
+  --glass: rgba(18, 82, 84, 0.46);
+  --glass-strong: rgba(14, 68, 70, 0.72);
+  --glass-solid: rgba(10, 56, 58, 0.97);
+  --orb-1: rgba(53, 205, 169, 0.36);
+  --orb-2: rgba(120, 226, 214, 0.16);
+  --orb-3: rgba(14, 150, 140, 0.42);
+  --glass-edge: rgba(150, 245, 224, 0.22);
+  --glass-line: rgba(127, 224, 200, 0.30);
+  --text: #f4f7f6;        /* 15:1 */
+  --text-2: #e2e8e6;      /* 12:1 neutral light grey */
+  --text-3: #d3dbd8;      /* 9:1 even on the brightest glow */
+  --brand: #7fe0c8;       /* fill colour; text on it is dark */
+  --on-brand: #052a2c;
+  --brand-soft: rgba(127, 224, 200, 0.16);
+  --accent: #7fe0c8;
+  --border: rgba(127, 224, 200, 0.26);
+  --control: #8fb2a8;     /* 5.5:1 control boundary */
+  --focus: #b9f5e8;
+  --glow: 0 0 0 1px rgba(127, 224, 200, 0.55), 0 0 26px -2px rgba(53, 205, 169, 0.45);
+  --shadow: 0 1px 0 var(--glass-edge) inset, 0 0 0 1px rgba(127, 224, 200, 0.06), 0 14px 34px -16px rgba(0, 0, 0, 0.65);
+  --shadow-pop: 0 1px 0 var(--glass-edge) inset, 0 0 30px -4px rgba(53, 205, 169, 0.35), 0 24px 52px -16px rgba(0, 0, 0, 0.75);
+  /* one colour family for every alert in dark mode: meaning comes from the icon and the label */
+  --ok-fg: #b6f3e5;   --ok-bg: rgba(127, 224, 200, 0.14);
+  --warn-fg: #b6f3e5; --warn-bg: rgba(127, 224, 200, 0.14);
+  --bad-fg: #b6f3e5;  --bad-bg: rgba(127, 224, 200, 0.14);
+  --info-fg: #b6f3e5; --info-bg: rgba(127, 224, 200, 0.14);
+  --chart-1: #7fe0c8; --chart-2: #c9f6ec; --chart-grid: rgba(127, 224, 200, 0.18);
+  --nav-active-bg: rgba(127, 224, 200, 0.18);
+  --logo-stroke: #f4f7f6; --logo-dot: #f4f7f6;
+  --splash: radial-gradient(80% 60% at 50% 30%, #0d5558 0%, #062a2d 62%, #041d20 100%);
+  --page: #021416;
+}
