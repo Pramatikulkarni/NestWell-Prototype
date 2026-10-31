@@ -3,6 +3,7 @@
 Clickable UX case-study prototype for **NestWell**, a remote patient monitoring service.
 Three portals (patient, clinician, admin), phone and desktop layouts, light and dark themes.
 
+- **Live prototype:** https://nestwell-prototype.netlify.app
 - **Stack:** plain HTML, CSS and ES modules. No build step.
 - **Run locally:** `python3 -m http.server 8000`, then open `http://localhost:8000`.
 - **Data:** all people, hospitals, readings and numbers are sample data created for this case study. No real patient data.
