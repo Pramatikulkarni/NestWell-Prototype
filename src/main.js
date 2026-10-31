@@ -110,6 +110,8 @@ function moreSheet(st) {
 
 // Public link: the app fills the window and adapts to the device. The device switcher bar only shows with ?review or inside the review page.
 const REVIEW = /[?&]review\b/.test(location.search) || window.top !== window;
+// Netlify's free plan overlays a "Powered by Netlify" badge at the bottom-left of the page. Leave room for it so it never covers our controls.
+if (!REVIEW && /\.netlify\.app$/.test(location.hostname)) document.documentElement.classList.add('nfb');
 function toolbar(st) {
   if (!REVIEW) return '';
   return `<div class="proto-bar" role="region" aria-label="Prototype controls"><span class="brand">NestWell</span>

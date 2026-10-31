@@ -944,3 +944,5 @@ body[data-nw="dark"] .aboutbtn::after{background:var(--accent)}
 .stage[data-device="auto"] .status-bar{display:none}
 .stage[data-device="auto"] .bottom-nav{margin-bottom:max(12px,env(safe-area-inset-bottom))}
 .stage[data-device="auto"] .entryfoot{padding-bottom:max(10px,env(safe-area-inset-bottom))}
+html.nfb .stage[data-device="auto"] .app{height:calc(100vh - 64px);height:calc(100dvh - 64px);border-radius:0 0 22px 22px}
+html.nfb body{background:var(--page)}
