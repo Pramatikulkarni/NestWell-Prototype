@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NestWell case study</title>
+<meta name="description" content="NestWell: remote patient monitoring UX case study by Pramati Kulkarni. Opens the phone or desktop version automatically.">
+<meta name="robots" content="noindex">
+<style>
+  :root{--bg:#f1f5f1;--text:#16312c;--text2:#435a53;--brand:#1f6256;--on:#fff}
+  @media (prefers-color-scheme:dark){:root{--bg:#062a2d;--text:#f4f7f6;--text2:#e2e8e6;--brand:#7fe0c8;--on:#052a2c}}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:24px;background:var(--bg);color:var(--text);font:16px/1.5 Inter,system-ui,sans-serif;text-align:center}
+  main{max-width:420px;display:flex;flex-direction:column;align-items:center;gap:14px}
+  h1{margin:0;font:700 26px/1.2 Manrope,Inter,system-ui,sans-serif}
+  p{margin:0;color:var(--text2)}
+  .spin{width:34px;height:34px;border-radius:50%;border:3px solid var(--brand);border-right-color:transparent;animation:s .9s linear infinite}
+  @keyframes s{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){.spin{animation:none}}
+  .choices{display:none;flex-direction:column;gap:10px;width:100%;margin-top:6px}
+  .choices.show{display:flex}
+  a.btn{display:flex;align-items:center;justify-content:center;min-height:52px;padding:0 20px;border-radius:16px;font-weight:600;text-decoration:none;color:var(--on);background:var(--brand)}
+  a.btn.ghost{background:none;color:var(--text);border:1.5px solid var(--brand)}
+  a:focus-visible{outline:3px solid var(--text);outline-offset:3px}
+</style>
+</head>
+<body>
+<main>
+  <div class="spin" id="spin" aria-hidden="true"></div>
+  <h1>NestWell case study</h1>
+  <p id="msg" role="status">Opening the best version for your screen…</p>
+  <div class="choices" id="choices">
+    <a class="btn" id="goPhone" href="#">Open the phone version</a>
+    <a class="btn ghost" id="goDesktop" href="#">Open the desktop version</a>
+  </div>
+  <noscript><p>JavaScript is off. Please pick a version:</p>
+    <a class="btn" href="https://www.figma.com/proto/fsXRKFcL4dfZjdp2WSmu2n/NestWell-Case-Study?node-id=162-2040&page-id=2%3A3&starting-point-node-id=162%3A2040&scaling=scale-down-width&content-scaling=fixed">Phone version</a>
+    <a class="btn ghost" href="https://www.figma.com/proto/fsXRKFcL4dfZjdp2WSmu2n/NestWell-Case-Study?node-id=17-2&page-id=2%3A3&starting-point-node-id=17%3A2&scaling=scale-down&content-scaling=fixed">Desktop version</a></noscript>
+</main>
+<script>
+  // ── Edit the two Figma prototype links here ──
+  var FIGMA_FILE = 'fsXRKFcL4dfZjdp2WSmu2n', NAME = 'NestWell-Case-Study', PAGE = '2%3A3';
+  var link = function (frame, scaling) {
+    var id = frame.replace(':', '-');
+    return 'https://www.figma.com/proto/' + FIGMA_FILE + '/' + NAME + '?node-id=' + id + '&page-id=' + PAGE +
+      '&starting-point-node-id=' + encodeURIComponent(frame) + '&scaling=' + scaling + '&content-scaling=fixed';
+  };
+  var LINKS = { phone: link('162:2040', 'scale-down-width'), desktop: link('17:2', 'scale-down') };
+
+  function isPhone() {
+    var ua = navigator.userAgent || '';
+    if (Math.min(screen.width, screen.height) >= 700) return false; // tablets and computers get the desktop deck
+    if (navigator.userAgentData && navigator.userAgentData.mobile) return true;
+    if (/Android.+Mobile|iPhone|iPod|Windows Phone|Mobile Safari/i.test(ua) && !/iPad|Tablet/i.test(ua)) return true;
+    var small = Math.min(screen.width, screen.height) <= 600;
+    return small && window.matchMedia('(pointer:coarse)').matches;
+  }
+  var q = new URLSearchParams(location.search).get('view');
+  var view = (q === 'phone' || q === 'desktop') ? q : (isPhone() ? 'phone' : 'desktop');
+  document.getElementById('goPhone').href = LINKS.phone;
+  document.getElementById('goDesktop').href = LINKS.desktop;
+  // if the redirect is slow or blocked, let the visitor choose
+  setTimeout(function () {
+    document.getElementById('spin').style.display = 'none';
+    document.getElementById('msg').textContent = 'Choose a version:';
+    document.getElementById('choices').classList.add('show');
+  }, 2500);
+  location.replace(LINKS[view]);
+</script>
+</body>
+</html>
